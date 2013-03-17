@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="sedo_po_manager" title="Po Manager" version_string="1.0.2" version_id="1" url="http://xenforo.com/community/resources/po-manager.1452/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates>
+    <template title="language_export_po"><![CDATA[<xen:title>{xen:phrase sedo_export_language_to_po}: {$language.title}</xen:title>
+
+<xen:form action="{xen:adminlink languages/export-to-po, $language}">
+	<xen:controlunit label="{xen:phrase language}:">{$language.title}</xen:controlunit>
+	<xen:selectunit name="addon_id" label="{xen:phrase export_from_add_on}:">
+		<xen:option value="">({xen:phrase all})</xen:option>
+		<xen:options source="$addOnOptions" />
+	</xen:selectunit>
+	<xen:checkboxunit label="">
+		<xen:option name="untranslated" label="{xen:phrase get_untranslated_phrases}">
+			<xen:hint>{xen:phrase helpful_if_wish_to_translate_language_using_xml_file}</xen:hint>
+		</xen:option>
+		<xen:option name="disablefuzzy" label="{xen:phrase sedo_po_disable_fuzzy}">
+			<xen:hint>{xen:phrase sedo_po_disable_fuzzy_desc}</xen:hint>
+		</xen:option>
+	</xen:checkboxunit>
+	<xen:submitunit save="{xen:phrase export_language}" saveclass="OverlayCloser" resetclass="OverlayCloser" />
+
+	<input type="hidden" name="_xfConfirm" value="1" />
+</xen:form>]]></template>
+    <template title="language_po_to_xml"><![CDATA[<xen:title>{xen:phrase sedo_po_import_po_file}</xen:title>
+
+<xen:form action="{xen:adminlink languages/po-to-xml}" upload="true">
+
+	<xen:uploadunit label="{xen:phrase import_from_uploaded_file}:" name="upload" />
+	<xen:submitunit save="{xen:phrase sedo_po_convert_po_to_xml}" />
+
+	<input type="hidden" name="_xfConfirm" value="1" />
+</xen:form>]]></template>
+  </admin_templates>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="Sedo_PoManager_Listeners_Controllers" callback_method="extend" active="1" description="Extend Controller"/>
+    <listener event_id="load_class_model" execute_order="10" callback_class="Sedo_PoManager_Listeners_Models" callback_method="extend" active="1" description="Extend Models"/>
+    <listener event_id="template_post_render" execute_order="10" callback_class="Sedo_PoManager_Listeners_Templates" callback_method="postRender" active="1" description="Template PostRender"/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <optiongroups/>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="sedo_export_language_to_po" version_id="0" version_string="1"><![CDATA[Export language to PO file]]></phrase>
+    <phrase title="sedo_po_convert_po_to_xml" version_id="0" version_string="1"><![CDATA[Convert Po to Xml]]></phrase>
+    <phrase title="sedo_po_disable_fuzzy" version_id="0" version_string="1"><![CDATA[Disable PO phrases fuzzy mode?]]></phrase>
+    <phrase title="sedo_po_disable_fuzzy_desc" version_id="0" version_string="1"><![CDATA[When the "Fuzzy" mode is disabled in PO, the phrases don't need to be confirmed in a PO editor. The translation is considered as final.]]></phrase>
+    <phrase title="sedo_po_error_during_upload" version_id="0" version_string="1"><![CDATA[An error has occured during file upload]]></phrase>
+    <phrase title="sedo_po_export_to_po" version_id="0" version_string="1"><![CDATA[Export to Po]]></phrase>
+    <phrase title="sedo_po_file_extension_must_be_po" version_id="0" version_string="1"><![CDATA[The file must be a po file, so its extension must be ".po"]]></phrase>
+    <phrase title="sedo_po_import_po_file" version_id="0" version_string="1"><![CDATA[Import Po File]]></phrase>
+    <phrase title="sedo_po_po_to_xml" version_id="0" version_string="1"><![CDATA[Po to Xml]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <style_properties/>
+  <templates/>
+  <bb_code_media_sites/>
+  <template_modifications/>
+</addon>
