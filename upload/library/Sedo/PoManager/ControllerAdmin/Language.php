@@ -64,12 +64,14 @@ class Sedo_PoManager_ControllerAdmin_Language extends XFCP_Sedo_PoManager_Contro
 
 			$po = $this->_getLanguageModel()->getLanguagePo($language, $addOnId, $input['untranslated'], $fuzzy);
 
-			$filename = "$xenAddon-$title";
-			header('Content-type: application/txt');
-			header('Content-disposition: po' . date("Y-m-d") . '.po');
-			header('Content-disposition: filename=' . $filename . '.po');
-			print $po;
-			exit;
+			$this->_routeMatch->setResponseType('raw');
+
+			$viewParams = array(
+				'filename' => "$xenAddon-$title",
+				'po' => $po
+			);
+
+			return $this->responseView('Sedo_PoManager_ViewAdmin_Language_ExportPo', '', $viewParams);
 		}
 		else
 		{
